@@ -7,6 +7,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/success', (req, res, next) => {
+  res.render("success");
+})
+
+router.get('/failure', (req, res, next) => {
+  res.render('failure');
+})
+
 router.get('/auth/google', passport.authenticate('google', { scope: ['openid', 'email', 'profile'] }));
 
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/failure'}), (req, res) => {
