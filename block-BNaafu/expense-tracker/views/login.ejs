@@ -9,7 +9,9 @@
     <form action="/users/login" method="POST">
       <input type="text" name="email" placeholder="enter email">
       <input type="text" name="password" placeholder="enter password">
-      <input type="submit" value="Login">
+      <% if(user){ %>
+        <input type="submit" value="Login">
+      <% } %>
     </form>
   </body>
 </html>

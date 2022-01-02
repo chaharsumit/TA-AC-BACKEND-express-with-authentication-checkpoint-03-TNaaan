@@ -8,6 +8,7 @@ var session = require('express-session');
 var MongoStore = require('connect-mongo');
 var flash = require('connect-flash');
 var passport = require('passport');
+var auth = require('./middlewares/auth');
 
 require('dotenv').config();
 
@@ -42,6 +43,8 @@ app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(auth.userInfo);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
