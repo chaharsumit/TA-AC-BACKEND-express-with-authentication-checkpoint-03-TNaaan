@@ -30,7 +30,12 @@ passport.use(new GithubStrategy({
         return done(null, newUser);
       })
     }else{
-      return done(null, user);
+      User.findOneAndUpdate({email: profile._json.email}, profileData, (err, updatedUser) => {
+        if(err){
+          return done(err);
+        }
+        return done(null, updatedUser);
+      })
     }
   })
 }))
@@ -60,7 +65,12 @@ passport.use(new GoogleStrategy({
         return done(null, newUser);
       })
     }else{
-      return done(null, user);
+      User.findOneAndUpdate({email: profile._json.email}, profileData, (err, updatedUser) => {
+        if(err){
+          return done(err);
+        }
+        return done(null, updatedUser);
+      })
     }
   })
 }));

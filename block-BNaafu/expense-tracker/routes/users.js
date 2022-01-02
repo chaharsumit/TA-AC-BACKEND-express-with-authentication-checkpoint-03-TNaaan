@@ -55,7 +55,7 @@ router.post('/login', (req, res, next) => {
     if(!user){
       return res.redirect('/users/login');
     }
-    user.verfiyPassword(password, (err, result) => {
+    user.verifyPassword(password, (err, result) => {
       if(err){
         return next(err);
       }
