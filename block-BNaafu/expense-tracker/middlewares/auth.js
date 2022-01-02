@@ -31,11 +31,13 @@ module.exports = {
 
 module.exports = {
   UserLoggedIn: (req, res, next) => {
-    if((req.session && req.session.userId) || (req.session && req.session.passport)){
-      next();
+    if(req.session && req.session.userId){
+      return next();
+    }else if(req.session && req.session.passport){
+      return next();
     }else{
       req.flash('error', "You haven't logged in yet, Please login to continue!!");
-      res.redirect("/users");
+      res.redirect("/users/login");
     }
   },
   userInfo: (req, res, next) => {

@@ -1,6 +1,9 @@
 var express = require('express');
 const User = require('../models/User');
-let bcrypt = require('bcrypt');
+var auth = require("../middlewares/auth");
+var bcrypt = require('bcrypt');
+const Income = require('../models/Income');
+const Expense = require('../models/Expense');
 var router = express.Router();
 
 /* GET users listing. */
@@ -12,8 +15,40 @@ router.get('/register', (req, res, next) => {
   res.render("register");
 })
 
-router.get('/onboard', (req, res, next) => {
+router.get('/onboard', auth.UserLoggedIn, (req, res, next) => {
   res.render("onboard");
+})
+
+router.get('/income', auth.UserLoggedIn, (req, res, next) => {
+  res.render('income');
+})
+
+router.post('/income', auth.UserLoggedIn, (req, res, next) => {
+  let userId = req.session.userId || req.session.passport.user;
+  req.body.userId = userId;
+  req.body.source = req.body.source.trim().split(" ");
+  Income.create(req.body, (err, income) => {
+    if(err){
+      return next(err);
+    }
+    res.redirect('/users/onboard');
+  });
+})
+
+router.get('/expense', auth.UserLoggedIn, (req, res, next) => {
+  res.render('expense');
+})
+
+router.post('/expense', auth.UserLoggedIn, (req, res, next) => {
+  let userId = req.session.userId || req.session.passport.user;
+  req.body.userId = userId;
+  req.body.category = req.body.category.trim().split(" ");
+  Expense.create(req.body, (err, expense) => {
+    if(err){
+      return next(err);
+    }
+    res.redirect('/users/onboard');
+  });
 })
 
 router.post('/', (req, res, next) => {
