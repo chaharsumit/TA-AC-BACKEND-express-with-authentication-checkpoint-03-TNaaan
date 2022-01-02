@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expense Tracker</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>welcome to expense Tracker</h1>
+    <form action="/users/income" method="POST">
+      <input type="text" name="source" placeholder="enter sources space separated">
+      <input type="date" name="date">
+      <input type="number" name="amount" placeholder="enter amount">
+      <input type="submit" value="Add Income"> 
+    </form>
+    <a href="/users/logout">Logout</a>
+  </body>
+</html>
