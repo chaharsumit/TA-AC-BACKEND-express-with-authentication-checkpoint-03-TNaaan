@@ -12,6 +12,10 @@ router.get('/register', (req, res, next) => {
   res.render("register");
 })
 
+router.get('/onboard', (req, res, next) => {
+  res.render("onboard");
+})
+
 router.post('/', (req, res, next) => {
   let { email } = req.body;
   User.findOne({ email }, (err, user) => {
@@ -63,7 +67,7 @@ router.post('/login', (req, res, next) => {
         return res.redirect('/users/login');
       }
       req.session.userId = user.id;
-      res.redirect('/');
+      res.redirect('/users/onboard');
     })
   })
 })

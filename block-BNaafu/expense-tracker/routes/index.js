@@ -18,13 +18,13 @@ router.get('/failure', (req, res, next) => {
 router.get('/auth/google', passport.authenticate('google', { scope: ['openid', 'email', 'profile'] }));
 
 router.get('/auth/google/callback', passport.authenticate('google', {failureRedirect: '/failure'}), (req, res) => {
-  res.redirect('/success');
+  res.redirect('/users/onboard');
 })
 
 router.get('/auth/github', passport.authenticate('github'));
 
 router.get('/auth/github/callback', passport.authenticate('github', {failureRedirect: '/failure'}), (req, res) => {
-  res.redirect('/success');
+  res.redirect('/users/onboard');
 })
 
 module.exports = router;
