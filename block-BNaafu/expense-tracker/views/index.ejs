@@ -8,5 +8,8 @@
     <h1>welcome to expense Tracker</h1>
     <a href="/auth/google">Login with google</a>
     <a href="/auth/github">Login with github</a>
+    <% if(user) {%>
+      <a href="/users/logout">Logout</a>
+    <% } %>
   </body>
 </html>
