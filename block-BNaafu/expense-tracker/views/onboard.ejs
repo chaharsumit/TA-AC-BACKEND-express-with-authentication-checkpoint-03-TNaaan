@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expense Tracker</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>welcome to Onboarding Page!!</h1>
+    <a href="/">Home</a>
+    <% if(user) {%>
+      <a href="/users/logout">Logout</a>
+    <% } %>
+    <a href="/users/income">Add Income</a>
+    <a href="/users/expense">Add Expense</a>
+  </body>
+</html>

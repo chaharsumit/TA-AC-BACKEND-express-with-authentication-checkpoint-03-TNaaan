@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expense Tracker</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Login</h1>
+    <form action="/users/login" method="POST">
+      <input type="text" name="email" placeholder="enter email">
+      <input type="text" name="password" placeholder="enter password">
+      <% if(user){ %>
+        <input type="submit" value="Login">
+      <% } %>
+    </form>
+  </body>
+</html>
