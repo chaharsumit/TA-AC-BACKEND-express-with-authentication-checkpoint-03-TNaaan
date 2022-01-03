@@ -19,6 +19,18 @@ router.post('/FromTo', auth.UserLoggedIn, (req, res, next) => {
   })
 });
 
+router.post('/FromToAndCategory', auth.UserLoggedIn, (req, res, next) => {
+  let from = new Date(req.body.from);
+  let id = req.session.userId || req.session.passport.user;
+  let to = new Date(req.body.to);
+  Expense.find({userId: id, date: {$gte: from, $lte: to}, category: {$in: req.body.category}}, (err, expenses) => {
+    if(err){
+      return next(err);
+    }
+    res.send(expenses);
+  })
+});
+
 
 router.post('/currentMonth', auth.UserLoggedIn, (req, res, next) => {
   let id = req.session.userId || req.session.passport.user;
@@ -53,7 +65,7 @@ router.post('/source', (req, res, next) => {
 
 router.post('/category', (req, res, next) => {
   let id = req.session.userId || req.session.passport.user;
-  Expense.find({userId: id, category: {$in: req.body.source}}, (err, expenses) => {
+  Expense.find({userId: id, category: {$in: req.body.category}}, (err, expenses) => {
     if(err){
       return next(err);
     }
