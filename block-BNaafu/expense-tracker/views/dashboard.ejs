@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Expense Tracker</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>welcome to Onboarding Page!!</h1>
+    <a href="/">Home</a>
+    <% if(user) {%>
+      <a href="/users/logout">Logout</a>
+    <% } %>
+    <a href="/users/onboard">Back to onboarding page</a>
+
+    <hr>
+
+    <h1>income</h1>
+    <% incomes.forEach(income => { %>
+      <p><%= income %></p>
+    <% }) %>
+
+
+    <h1>expense</h1>
+    <% expenses.forEach(expense => { %>
+      <p><%= expense %></p>
+    <% }) %>
+
+    <hr>
+
+    <h1>filters</h1>
+
+    <hr>
+
+    <h3>source of income</h3>
+    <form action="/filters/source" method="POST">
+      <select name="source" id="source">
+        <option value="" disabled selected>Select Income Source</option>
+        <% sources.forEach(source => { %>
+          <option value="<%= source %>"><%= source %></option>
+        <% }) %>
+      </select>
+      <input type="submit" value="filter">
+    </form>
+
+    <hr>
+
+    <h3>Expense based on Category</h3>
+    <form action="/filters/category" method="POST">
+      <select name="source" id="source">
+        <option value="" disabled selected>Select Income Source</option>
+        <% categories.forEach(category => { %>
+          <option value="<%= category %>"><%= category %></option>
+        <% }) %>
+      </select>
+      <input type="submit" value="filter">
+    </form>
+
+    <hr>
+
+    <h3>Filter by date</h3>
+    <form action="/filters/FromTo" method="POST">
+      <label for="from">From:</label>
+      <input type="date" name="from" id="from">
+      <label for="to">To:</label>
+      <input type="date" name="to" id="to">
+      <input type="submit" value="filter">
+    </form>
+
+    <hr>
+
+    <h3>current month</h3>
+    <form action="/filters/currentMonth" method="POST">
+      <label for="month">Choose month</label>
+      <input type="month" name="month" id="month">
+      <input type="submit" value="filter">
+    </form>
+
+  </body>
+</html>

@@ -14,6 +14,7 @@ require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var filtersRouter = require('./routes/filters');
 
 mongoose.connect('mongodb://localhost/expense', (err) => {
   console.log(err ? err : "Database is connected successfully");
@@ -48,6 +49,7 @@ app.use(auth.userInfo);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/filters', filtersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
