@@ -44,10 +44,11 @@
 
     <hr>
 
+
     <h3>Expense based on Category</h3>
     <form action="/filters/category" method="POST">
-      <select name="source" id="source">
-        <option value="" disabled selected>Select Income Source</option>
+      <select name="category" id="category">
+        <option value="" disabled selected>Select Expense Category</option>
         <% categories.forEach(category => { %>
           <option value="<%= category %>"><%= category %></option>
         <% }) %>
@@ -74,6 +75,25 @@
       <input type="month" name="month" id="month">
       <input type="submit" value="filter">
     </form>
+
+    <hr>
+
+    <h3>source of income</h3>
+    <form action="/filters/FromToAndCategory" method="POST">
+      <label for="from">From:</label>
+      <input type="date" name="from" id="from">
+      <label for="to">To:</label>
+      <input type="date" name="to" id="to">
+      <select name="category" id="category">
+        <option value="" disabled selected>Select Expense Category</option>
+        <% categories.forEach(category => { %>
+          <option value="<%= category %>"><%= category %></option>
+        <% }) %>
+      </select>
+      <input type="submit" value="filter">
+    </form>
+
+    <hr>
 
   </body>
 </html>
