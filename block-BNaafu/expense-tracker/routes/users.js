@@ -51,6 +51,31 @@ router.post('/expense', auth.UserLoggedIn, (req, res, next) => {
   });
 })
 
+router.get('/dashboard', auth.UserLoggedIn, (req, res, next) => {
+  let id = req.session.userId || req.session.passport.user;
+  Income.find({userId: id}, (err, incomes) => {
+    if(err){
+      return next(err);
+    }
+    Expense.find({userId: id}, (err, expenses) => {
+      if(err){
+        return next(err);
+      }
+      Income.find().distinct('source', (err, sources) => {
+        if(err){
+          return next(err);
+        }
+        Expense.find().distinct('category', (err, categories) => {
+          if(err){
+            return next(err);
+          }
+          res.render('dashboard', { incomes, expenses, sources, categories });
+        })
+      })
+    })
+  })
+})
+
 router.post('/', (req, res, next) => {
   let { email } = req.body;
   User.findOne({ email }, (err, user) => {
